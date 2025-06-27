@@ -3,9 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Elajjaz Death Stranding Name Generator">
+    <meta property="og:description" content="Generate a Death Stranding name for Elajjaz">
+    <meta property="og:image" content="https://mentalvary.github.io/ela_deathstranding_name/teaser.png">
     <title>Elajjaz Death Stranding Name Generator</title>
+    <style>
+        @font-face {
+            font-family: 'ds';
+            src: url('ds.otf') format('opentype');
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'ds', sans-serif;
+            color: #dde2e5;
+            background-color: #202d36;
+            background-image: url('bg.jpg');
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .name-container {
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            text-align: center;
+        }
+
+        #name {
+            font-size: 300%;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 0.3em;
+        }
+
+        #subname {
+            margin-top: 0.3em;
+            font-size: 200%;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 0.2em;
+        }
+
+        #image {
+            height: 100vh;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h4 {
+            text-align: center;
+            color: black;
+        }
+    </style>
+    <script type="text/javascript">
+        const names = [
+            "Washed",
+            "Seeth",
+            "Tilt",
+            "Dent",
+            "Jorts",
+            "Dent",
+            "Short",
+            "Bald",
+            "Mald",
+            "Garf",
+            "Hentai",
+            "Weeb",
+            "Gimmick",
+            "Gnome",
+            "Shrimp",
+            "Gore",
+            "Throw",
+            "Lash",
+            "Ikea-Aim",
+            "Streamer",
+            "Hyuk",
+            "KitKat",
+            "Sergal",
+            "No-Record",
+            "Clockwise",
+            "Flush",
+            "Soy",
+            "Howl",
+            "Giga",
+            "Myega",
+            "Kraken",
+            "Tight",
+            "Unhinged",
+            "Sick",
+            "Carried",
+            "Dead-Weight",
+            "Toupée",
+            "Oats",
+            "Zync",
+            "Lies",
+            "Ass"
+        ];
+
+        const images = [
+            "ela1.png",
+            "ela2.png",
+            "ela3.png",
+            "ela4.png",
+            "ela5.png",
+            "ela6.png",
+            "ela7.png",
+            "ela8.png",
+            "ela9.png",
+            "ela10.png",
+        ]
+
+        function getRandomNames() {
+            const firstIndex = Math.floor(Math.random() * names.length);
+            let secondIndex;
+            do {
+                secondIndex = Math.floor(Math.random() * names.length);
+            } while (secondIndex === firstIndex);
+
+            return [names[firstIndex], names[secondIndex]];
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const [first, last] = getRandomNames();
+            const name = `${first} ${last}man`;
+            document.getElementById("name").textContent = name.toUpperCase();
+            document.getElementById("image").src = images[Math.floor(Math.random() * images.length)];
+        });
+    </script>
 </head>
 <body>
-    <h1>Elajjaz Death Stranding Name Generator</h1>
+    <h4>Refresh for a new name</h4>
+    <div class="container">
+        <img id="image"></img>
+        <div class="name-container">
+            <div id="name"></div>
+            <div id="subname">ELIAS&nbsp;&nbsp;LÖNN</div>
+        </div>
+    </div>
 </body>
 </html>
