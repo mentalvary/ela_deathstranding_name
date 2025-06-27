@@ -68,6 +68,7 @@
         }
     </style>
     <script type="text/javascript">
+        // Hi chat
         const names = [
             "Washed",
             "Seeth",
@@ -109,26 +110,16 @@
             "Oats",
             "Zync",
             "Lies",
-            "Ass"
+            "Ass",
+            "Gamer",
+            "3-Int",
+            "OneGuy",
+            "Lasagna",
+            "Old",
+            "Goon"
         ];
 
-        const images = [
-            "ela1.png",
-            "ela2.png",
-            "ela3.png",
-            "ela4.png",
-            "ela5.png",
-            "ela6.png",
-            "ela7.png",
-            "ela8.png",
-            "ela9.png",
-            "ela10.png",
-            "ela11.png",
-            "ela12.png",
-            "ela13.png",
-            "ela14.png",
-            "ela15.png",
-        ]
+        const imageCount = 15;
 
         function getRandomNames() {
             const firstIndex = Math.floor(Math.random() * names.length);
@@ -144,7 +135,9 @@
             const [first, last] = getRandomNames();
             const name = `${first} ${last}man`;
             document.getElementById("name").textContent = name.toUpperCase();
-            document.getElementById("image").src = images[Math.floor(Math.random() * images.length)];
+
+            const imageIndex = Math.floor(Math.random() * imageCount) + 1;
+            document.getElementById("image").src = `ela${imageIndex}.png`;
         });
     </script>
 </head>
