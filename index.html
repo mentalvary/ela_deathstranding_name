@@ -25,6 +25,7 @@
             background-color: #202d36;
             background-image: url('bg.jpg');
             background-repeat: no-repeat;
+            background-size: 100% auto;
         }
 
         .container {
@@ -52,13 +53,16 @@
         }
 
         #image {
-            height: 100vh;
+            height: calc(100vh - 2.5em);
             position: relative;
             left: 50%;
             transform: translateX(-50%);
         }
 
         h4 {
+            font-size: 1em;
+            margin: 0;
+            margin-bottom: 1em;
             text-align: center;
             color: black;
         }
