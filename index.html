@@ -164,7 +164,7 @@
 
         function generate() {
             const isNameOfTheDay = window.location.hash === '#today';
-            const today = new Date().toISOString().split('T')[0];
+            const today = new Date().toLocaleDateString('sv');
             const seed = cyrb128(today + "2");
             rng = isNameOfTheDay ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
             
