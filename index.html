@@ -132,7 +132,11 @@
             "L-Rizz",
             "Blind",
             "Deaf",
-            "Unc"
+            "Unc",
+            "Zip",
+            "tututu",
+            "React",
+            "Juzi",
         ];
 
         const imageCount = 14;
@@ -156,7 +160,7 @@
         function generate() {
             const nameOfTheDay = window.location.hash === '#today';
             const today = new Date().toISOString().split('T')[0];
-            const seed = cyrb128(today);
+            const seed = cyrb128(today + "2");
             rng = nameOfTheDay ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
             
             const [first, last] = getRandomNames();
