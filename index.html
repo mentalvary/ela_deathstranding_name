@@ -118,35 +118,42 @@
             "Old",
             "Goon",
             "SexHaver",
-            "L-Rizz"
+            "L-Rizz",
+            "Blind",
+            "Deaf",
+            "Unc"
         ];
 
-        const imageCount = 15;
-
-        function getRandomNames() {
-            const firstIndex = Math.floor(Math.random() * names.length);
-            let secondIndex;
-            do {
-                secondIndex = Math.floor(Math.random() * names.length);
-            } while (secondIndex === firstIndex);
-
-            return [names[firstIndex], names[secondIndex]];
-        }
+        const imageCount = 14;
 
         document.addEventListener("DOMContentLoaded", function() {
             const [first, last] = getRandomNames();
             const name = `${first} ${last}man`;
             document.getElementById("name").textContent = name.toUpperCase();
 
-            const imageIndex = Math.floor(Math.random() * imageCount) + 1;
-            document.getElementById("image").src = `ela${imageIndex}.png`;
+            const imageIndex = getRandomInt(imageCount) + 1;
+            document.getElementById("image").src = `ela${imageIndex}.webp`;
         });
+
+        function getRandomNames() {
+            const firstIndex = getRandomInt(names.length);
+            let secondIndex;
+            do {
+                secondIndex = getRandomInt(names.length);
+            } while (secondIndex === firstIndex);
+
+            return [names[firstIndex], names[secondIndex]];
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
     </script>
 </head>
 <body>
     <h4>Refresh for a new name</h4>
     <div class="container">
-        <img id="image"></img>
+        <img id="image">
         <div class="name-container">
             <div id="name"></div>
             <div id="subname">ELIAS&nbsp;&nbsp;LÖNN</div>
