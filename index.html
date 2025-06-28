@@ -139,6 +139,11 @@
             "Juzi",
         ];
 
+        // To prevent name of the day changing when adding more names.
+        const numNamesAtDate = {
+            "2025-06-28": 56
+        };
+
         const imageCount = 14;
 
         let rng;
@@ -163,7 +168,8 @@
             const seed = cyrb128(today + "2");
             rng = nameOfTheDay ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
             
-            const [first, last] = getRandomNames();
+            const sourceNames = (nameOfTheDay && numNamesAtDate[today]) ? names.slice(0, numNamesAtDate[today]) : names
+            const [first, last] = getRandomNames(sourceNames);
             const name = `${first} ${last}man`;
             document.getElementById("name").textContent = name.toUpperCase();
 
@@ -173,14 +179,14 @@
             document.getElementById("today").textContent = nameOfTheDay ? `Name of ${today}` : '';
         }
 
-        function getRandomNames() {
-            const firstIndex = getRandomInt(names.length);
+        function getRandomNames(sourceNames) {
+            const firstIndex = getRandomInt(sourceNames.length);
             let secondIndex;
             do {
-                secondIndex = getRandomInt(names.length);
+                secondIndex = getRandomInt(sourceNames.length);
             } while (secondIndex === firstIndex);
 
-            return [names[firstIndex], names[secondIndex]];
+            return [sourceNames[firstIndex], sourceNames[secondIndex]];
         }
 
         function getRandomInt(max) {
