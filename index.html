@@ -140,7 +140,7 @@
         ];
 
         // To prevent name of the day changing when adding more names.
-        const numNamesAtDate = {
+        const nameCountAtDate = {
             "2025-06-28": 56
         };
 
@@ -163,12 +163,12 @@
         });
 
         function generate() {
-            const nameOfTheDay = window.location.hash === '#today';
+            const isNameOfTheDay = window.location.hash === '#today';
             const today = new Date().toISOString().split('T')[0];
             const seed = cyrb128(today + "2");
-            rng = nameOfTheDay ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
+            rng = isNameOfTheDay ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
             
-            const sourceNames = (nameOfTheDay && numNamesAtDate[today]) ? names.slice(0, numNamesAtDate[today]) : names
+            const sourceNames = (isNameOfTheDay && nameCountAtDate[today]) ? names.slice(0, nameCountAtDate[today]) : names
             const [first, last] = getRandomNames(sourceNames);
             const name = `${first} ${last}man`;
             document.getElementById("name").textContent = name.toUpperCase();
@@ -176,7 +176,7 @@
             const imageIndex = getRandomInt(imageCount) + 1;
             document.getElementById("image").src = `ela${imageIndex}.webp`;
             
-            document.getElementById("today").textContent = nameOfTheDay ? `Name of ${today}` : '';
+            document.getElementById("today").textContent = isNameOfTheDay ? `Name of ${today}` : '';
         }
 
         function getRandomNames(sourceNames) {
@@ -193,6 +193,7 @@
             return Math.floor(rng() * max);
         }
 
+        // Credit: https://stackoverflow.com/a/47593316
         function cyrb128(str) {
             let h1 = 1779033703, h2 = 3144134277,
                 h3 = 1013904242, h4 = 2773480762;
