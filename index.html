@@ -137,13 +137,13 @@
             "tututu",
             "React",
             "Juzi",
+            "Consistency"
         ];
 
         // To prevent name of the day changing when adding more names.
-        // TODO: make it nameCountBeforeDate now that you can pick arbitrary past dates.
-        const nameCountAtDate = {
-            "2025-06-28": 56
-        };
+        const nameCountOnAndBefore = [
+            [new Date("2025-07-13"), 56]
+        ];
 
         const imageCount = 14;
 
@@ -174,7 +174,7 @@
             const seed = cyrb128(targetDate + "2");
             rng = targetDate ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
             
-            const sourceNames = (targetDate && nameCountAtDate[targetDate]) ? names.slice(0, nameCountAtDate[targetDate]) : names
+            const sourceNames = targetDate ? names.slice(0, getNameCountOn(targetDate)) : names;
             const [first, last] = getRandomNames(sourceNames);
             const name = `${first} ${last}man`;
             document.getElementById("name").textContent = name.toUpperCase();
@@ -213,6 +213,18 @@
                 return null;
             }
             return new Date(parsedDate).toLocaleDateString('sv');
+        }
+
+        function getNameCountOn(targetDate) {
+            let result = names.length;
+            for (let i = nameCountOnAndBefore.length - 1; i >= 0; i--) {
+                const [dt, cnt] = nameCountOnAndBefore[i];
+                if (targetDate > dt) {
+                    break;
+                }
+                result = cnt;
+            }
+            return result;
         }
 
         function getRandomNames(sourceNames) {
