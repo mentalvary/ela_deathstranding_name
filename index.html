@@ -30,6 +30,7 @@
 
         .container {
             position: relative;
+            overflow: hidden;
         }
 
         .name-container {
@@ -149,6 +150,8 @@
 
         let rng;
 
+        let balloonInterval;
+
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("generate").addEventListener("click", function() {
                 window.location.hash = '';
@@ -174,14 +177,22 @@
             const seed = cyrb128(targetDate + "2");
             rng = targetDate ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
             
-            const sourceNames = targetDate ? names.slice(0, getNameCountOn(targetDate)) : names;
-            const [first, last] = getRandomNames(sourceNames);
-            const name = `${first} ${last}man`;
-            document.getElementById("name").textContent = name.toUpperCase();
+            if (targetDate && targetDate.endsWith('-08-13')) {
+                document.getElementById("name").textContent = 'FEELS BIRTHDAYMAN';    
+                document.getElementById("image").src = 'birthday.webp'; 
+                startBalloons();
+            }
+            else {            
+                const sourceNames = targetDate ? names.slice(0, getNameCountOn(targetDate)) : names;
+                const [first, last] = getRandomNames(sourceNames);
+                const name = `${first} ${last}man`;
+                document.getElementById("name").textContent = name.toUpperCase(); 
 
-            const imageIndex = getRandomInt(imageCount) + 1;
-            document.getElementById("image").src = `ela${imageIndex}.webp`;
-            
+                const imageIndex = getRandomInt(imageCount) + 1;
+                document.getElementById("image").src = `ela${imageIndex}.webp`;
+                stopBalloons();
+            }
+
             document.getElementById("dateLabel").textContent = targetDate ? `Name of ${targetDate}` : '';
 
             const datePicker = document.getElementById("datePicker");
@@ -241,6 +252,10 @@
             return Math.floor(rng() * max);
         }
 
+        function getRandomIntUnseeded(max) {
+            return Math.floor(Math.random() * max);
+        }
+
         // Credit: https://stackoverflow.com/a/47593316
         function cyrb128(str) {
             let h1 = 1779033703, h2 = 3144134277,
@@ -272,7 +287,34 @@
                 return (t >>> 0) / 4294967296;
             }
         }
+
+        function startBalloons() {
+            balloonInterval = setInterval(() => {
+                spawnBalloon();
+            }, 600 + getRandomIntUnseeded(600));
+        }
+
+        function stopBalloons() {
+            clearInterval(balloonInterval);
+            document.querySelectorAll('.balloon').forEach(b => b.remove());
+        }
+
+        function spawnBalloon() {
+            const balloonContainer = document.querySelector("#container");
+            const balloon = document.createElement("div");
+            balloon.textContent = "🎈";
+            balloon.classList.add("balloon");
+            balloon.classList.add(`balloon${getRandomInt(4)}`);
+            balloon.style.left = 80 + getRandomIntUnseeded(innerWidth - 200) + "px";
+            balloonContainer.appendChild(balloon);
+
+            setTimeout(() => {
+                balloon.remove();
+            }, 8000);
+        };
+
     </script>
+    <link rel="stylesheet" href="balloons.css">
 </head>
 <body>
     <h4>
@@ -282,7 +324,7 @@
         &nbsp;|&nbsp;
         Previous days <input id="datePicker" type="date"></input>
     </h4>
-    <div class="container">
+    <div id="container" class="container">
         <img id="image">
         <div class="name-container">
             <div id="name"></div>

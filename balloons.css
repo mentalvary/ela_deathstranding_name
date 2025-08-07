@@ -1,0 +1,92 @@
+/* based on https://dev.to/devlawrence/creating-a-balloon-effect-from-scratch-using-html-css-and-javascript-4poi */
+
+/* #balloon-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+} */
+
+.card {
+    background-color: #fff;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+}
+
+.card p {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+}
+
+.balloon {
+    position: absolute;
+    top: 0;
+    font-size: 7rem;
+}
+
+.balloon0 {
+    animation: balloon-fall0 linear 6s forwards;
+}
+
+.balloon1 {
+    animation: balloon-fall1 linear 7s forwards;
+    filter: hue-rotate(100deg);
+}
+
+.balloon2 {
+    animation: balloon-fall2 linear 6s forwards;
+    filter: hue-rotate(50deg) brightness(200%);
+}
+
+.balloon3 {
+    animation: balloon-fall3 linear 8s forwards;
+    filter: hue-rotate(200deg) brightness(150%);
+}
+
+@keyframes balloon-fall0 {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-100%) rotate(5deg);
+    }
+}
+
+@keyframes balloon-fall1 {
+    0% {
+        transform: translateY(100vh) rotate(0);
+    }
+
+    100% {
+        transform: translateY(-100%) rotate(-5deg);
+    }
+}
+
+@keyframes balloon-fall2 {
+    0% {
+        transform: translateY(100vh) rotate(0);
+    }
+
+    100% {
+        transform: translateY(-100%) rotate(-15deg);
+    }
+}
+
+@keyframes balloon-fall3 {
+    0% {
+        transform: translateY(100vh) rotate(0);
+    }
+
+    100% {
+        transform: translateY(-100%) rotate(15deg);
+    }
+}
