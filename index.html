@@ -179,7 +179,7 @@
             
             if (targetDate && targetDate.endsWith('-08-13')) {
                 document.getElementById("name").textContent = 'FEELS BIRTHDAYMAN';    
-                document.getElementById("image").src = 'birthday.webp'; 
+                document.getElementById("image").src = targetDate === '2025-08-13' ? 'birthday_gommage.webp' : 'birthday.webp';
                 startBalloons();
             }
             else {            
