@@ -174,8 +174,21 @@
         function generate() {
             const today = new Date().toLocaleDateString('sv');
             const targetDate = determineTargetDate(today);
-            const seed = cyrb128(targetDate + "2");
-            rng = targetDate ? sfc32(seed[0], seed[1], seed[2], seed[3]) : Math.random;
+
+
+            let seedInput;
+            if (targetDate) {
+                seedInput = targetDate + '2';
+            }
+            else {
+                // Note !targetDate implies that window.location.hash is not one of the targetDate formats, so
+                // we can treat it as a seed input.
+                seedInput = window.location.hash || '#' + getRandomIntUnseeded(9999999999999);
+                window.location.hash = seedInput;
+            }
+
+            const seed = cyrb128(seedInput);
+            rng = sfc32(seed[0], seed[1], seed[2], seed[3]);
             
             if (targetDate && targetDate.endsWith('-08-13')) {
                 document.getElementById("name").textContent = 'FEELS BIRTHDAYMAN';    
